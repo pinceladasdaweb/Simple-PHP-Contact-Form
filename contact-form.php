@@ -26,7 +26,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $hasError = true;
     }
 }
-?><!DOCTYPE html>
+?>
+
+<!DOCTYPE html>
 <html>
 <head>
     <title>Simple PHP Contact Form</title>
@@ -38,18 +40,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         <h1>Simple PHP Contact Form</h1>
         <p>A Simple Contact Form developed in PHP with HTML5 Form validation. Has a fallback in jQuery for browsers that do not support HTML5 form validation.</p>
     </div>
-    <?php if(isset($emailSent) && $emailSent) { ?>
+    <?php if(isset($emailSent) && $emailSent): ?>
         <div class="col-md-6 col-md-offset-3">
             <div class="alert alert-success text-center">Sua mensagem foi enviada com sucesso.</div>
         </div>
-    <?php
-    } else {
-        if(isset($hasError) && $hasError) {
-    ?>
+    <?php else: ?>
+        <?php if(isset($hasError) && $hasError): ?>
         <div class="col-md-5 col-md-offset-4">
             <div class="alert alert-danger text-center">Houve um erro no envio, tente novamente mais tarde.</div>
         </div>
-    <?php } ?>
+        <?php endif; ?>
 
     <div class="col-md-6 col-md-offset-3">
         <form action="<?php echo $_SERVER['REQUEST_URI']; ?>" id="contact-form" class="form-horizontal" role="form" method="post">
@@ -84,7 +84,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </form>
     </div>
-    <?php } ?>
+    <?php endif; ?>
 
     <?php
         function IEVersion() {
