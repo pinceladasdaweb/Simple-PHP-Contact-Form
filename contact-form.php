@@ -87,16 +87,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     <?php endif; ?>
 
     <?php
-        function IEVersion() {
-            return preg_match('/MSIE (.*?);/', $_SERVER['HTTP_USER_AGENT'], $matches) ? floatval($matches[1]) : null;
-        }
+        $ieVersion = preg_match('/MSIE (.*?);/', $_SERVER['HTTP_USER_AGENT'], $matches) ? floatval($matches[1]) : null;
 
-        if(IEVersion() < 9 && IEVersion() != null) {
-            echo "<script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>". PHP_EOL;
+        if($ieVersion < 9 && $ieVersion != null) {
+            $jQueryVersion = '1.10.2';
         } else {
-            echo "<script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'></script>". PHP_EOL;
+            $jQueryVersion = '2.0.3';
         }
     ?>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/<?php echo $jQueryVersion; ?>/jquery.min.js"></script>
     <script type="text/javascript" src="assets/js/contact-form.js"></script>
 </body>
 </html>
