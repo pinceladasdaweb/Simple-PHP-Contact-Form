@@ -2,48 +2,28 @@
 $emailTo = '<YOUR_EMAIL_HERE>';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if(trim($_POST['name']) == '') {
-        $hasError = true;
-    } else {
-        $name = trim($_POST['name']);
-    }
+    $name     = stripslashes(trim($_POST['name']));
+    $email    = stripslashes(trim($_POST['email']));
+    $assunto  = stripslashes(trim($_POST['assunto']));
+    $mensagem = stripslashes(trim($_POST['mensagem']));
 
-    if(trim($_POST['email']) == '')  {
-        $hasError = true;
-    } else if (!preg_match("/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/", trim($_POST['email']))) {
-        $hasError = true;
-    } else {
-        $email = trim($_POST['email']);
-    }
+    $emailIsValid = preg_match('/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/', $email);
 
-    if(trim($_POST['assunto']) == '') {
-        $hasError = true;
-    } else {
-        $assunto = trim($_POST['assunto']);
-    }
+    if($name && $email && $emailIsValid && $assunto && $mensagem){
+        $subject = "[Contato via site] $assunto";
+        $body = "Nome: $name <br /> Email: $email <br /> Mensagem: $mensagem";
 
-    if(trim($_POST['mensagem']) == '') {
-        $hasError = true;
-    } else {
-        if(function_exists('stripslashes')) {
-            $mensagem = stripslashes(trim($_POST['mensagem']));
-        } else {
-            $mensagem = trim($_POST['mensagem']);
-        }
-    }
-
-    if(!isset($hasError)) {
-        $subject = '[Contato via site] '.$assunto;
-        $body = "Nome: $name <br> Email: $email <br> Mensagem: $mensagem";
-
-        $headers  = 'MIME-Version: 1.1'. PHP_EOL;
-        $headers .= 'Content-type: text/html; charset=utf-8'. PHP_EOL;
-        $headers .= 'From: '.$name.' <'.$email.'>' . PHP_EOL;
-        $headers .= 'Return-Path: ' . $emailTo . PHP_EOL;
-        $headers .= 'Reply-To: ' . $email . PHP_EOL;
+        $headers  = 'MIME-Version: 1.1' . PHP_EOL;
+        $headers .= 'Content-type: text/html; charset=utf-8' . PHP_EOL;
+        $headers .= "From: $name <$email>" . PHP_EOL;
+        $headers .= "Return-Path: $emailTo" . PHP_EOL;
+        $headers .= "Reply-To: $email" . PHP_EOL;
 
         mail($emailTo, $subject, $body, $headers);
         $emailSent = true;
+
+    } else {
+        $hasError = true;
     }
 }
 ?><!DOCTYPE html>
@@ -58,13 +38,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         <h1>Simple PHP Contact Form</h1>
         <p>A Simple Contact Form developed in PHP with HTML5 Form validation. Has a fallback in jQuery for browsers that do not support HTML5 form validation.</p>
     </div>
-    <?php if(isset($emailSent) && $emailSent == true) { ?>
+    <?php if(isset($emailSent) && $emailSent) { ?>
         <div class="col-md-6 col-md-offset-3">
             <div class="alert alert-success text-center">Sua mensagem foi enviada com sucesso.</div>
         </div>
     <?php
     } else {
-        if(isset($hasError)) {
+        if(isset($hasError) && $hasError) {
     ?>
         <div class="col-md-5 col-md-offset-4">
             <div class="alert alert-danger text-center">Houve um erro no envio, tente novamente mais tarde.</div>
