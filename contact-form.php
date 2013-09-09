@@ -1,52 +1,34 @@
 <?php
 $emailTo = '<YOUR_EMAIL_HERE>';
 
-if($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if(trim($_POST['name']) === '') {
-        $hasError = true;
-    } else {
-        $name = trim($_POST['name']);
-    }
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $name     = stripslashes(trim($_POST['name']));
+    $email    = stripslashes(trim($_POST['email']));
+    $assunto  = stripslashes(trim($_POST['assunto']));
+    $mensagem = stripslashes(trim($_POST['mensagem']));
 
-    if(trim($_POST['email']) === '')  {
-        $hasError = true;
-    } else if (!preg_match("/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/", trim($_POST['email']))) {
-        $hasError = true;
-    } else {
-        $email = trim($_POST['email']);
-    }
+    $emailIsValid = preg_match('/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/', $email);
 
-    if(trim($_POST['assunto']) === '') {
-        $hasError = true;
-    } else {
-        $assunto = trim($_POST['assunto']);
-    }
+    if($name && $email && $emailIsValid && $assunto && $mensagem){
+        $subject = "[Contato via site] $assunto";
+        $body = "Nome: $name <br /> Email: $email <br /> Mensagem: $mensagem";
 
-    if(trim($_POST['mensagem']) === '') {
-        $hasError = true;
-    } else {
-        if(function_exists('stripslashes')) {
-            $mensagem = stripslashes(trim($_POST['mensagem']));
-        } else {
-            $mensagem = trim($_POST['mensagem']);
-        }
-    }
-
-    if(!isset($hasError)) {
-        $subject = '[Contato via site] '.$assunto;
-        $body = "Nome: $name <br> Email: $email <br> Mensagem: $mensagem";
-
-        $headers  = 'MIME-Version: 1.1'. PHP_EOL;
-        $headers .= 'Content-type: text/html; charset=utf-8'. PHP_EOL;
-        $headers .= 'From: '.$name.' <'.$email.'>' . PHP_EOL;
-        $headers .= 'Return-Path: ' . $emailTo . PHP_EOL;
-        $headers .= 'Reply-To: ' . $email . PHP_EOL;
+        $headers  = 'MIME-Version: 1.1' . PHP_EOL;
+        $headers .= 'Content-type: text/html; charset=utf-8' . PHP_EOL;
+        $headers .= "From: $name <$email>" . PHP_EOL;
+        $headers .= "Return-Path: $emailTo" . PHP_EOL;
+        $headers .= "Reply-To: $email" . PHP_EOL;
 
         mail($emailTo, $subject, $body, $headers);
         $emailSent = true;
+
+    } else {
+        $hasError = true;
     }
 }
-?><!DOCTYPE html>
+?>
+
+<!DOCTYPE html>
 <html>
 <head>
     <title>Simple PHP Contact Form</title>
@@ -58,18 +40,16 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h1>Simple PHP Contact Form</h1>
         <p>A Simple Contact Form developed in PHP with HTML5 Form validation. Has a fallback in jQuery for browsers that do not support HTML5 form validation.</p>
     </div>
-    <?php if(isset($emailSent) && $emailSent === true) { ?>
+    <?php if(isset($emailSent) && $emailSent): ?>
         <div class="col-md-6 col-md-offset-3">
             <div class="alert alert-success text-center">Sua mensagem foi enviada com sucesso.</div>
         </div>
-    <?php
-    } else {
-        if(isset($hasError)) {
-    ?>
+    <?php else: ?>
+        <?php if(isset($hasError) && $hasError): ?>
         <div class="col-md-5 col-md-offset-4">
             <div class="alert alert-danger text-center">Houve um erro no envio, tente novamente mais tarde.</div>
         </div>
-    <?php } ?>
+        <?php endif; ?>
 
     <div class="col-md-6 col-md-offset-3">
         <form action="<?php echo $_SERVER['REQUEST_URI']; ?>" id="contact-form" class="form-horizontal" role="form" method="post">
@@ -104,19 +84,18 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </form>
     </div>
-    <?php } ?>
+    <?php endif; ?>
 
     <?php
-        function IEVersion() {
-            return preg_match('/MSIE (.*?);/', $_SERVER['HTTP_USER_AGENT'], $matches) ? floatval($matches[1]) : null;
-        }
+        $ieVersion = preg_match('/MSIE (.*?);/', $_SERVER['HTTP_USER_AGENT'], $matches) ? floatval($matches[1]) : null;
 
-        if(IEVersion() < 9 && IEVersion() != null) {
-            echo "<script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>". PHP_EOL;
+        if($ieVersion < 9 && $ieVersion != null) {
+            $jQueryVersion = '1.10.2';
         } else {
-            echo "<script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'></script>". PHP_EOL;
+            $jQueryVersion = '2.0.3';
         }
     ?>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/<?php echo $jQueryVersion; ?>/jquery.min.js"></script>
     <script type="text/javascript" src="assets/js/contact-form.js"></script>
 </body>
 </html>
