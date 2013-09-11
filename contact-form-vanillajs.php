@@ -26,9 +26,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $hasError = true;
     }
 }
-?>
-
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html>
 <head>
     <title>Simple PHP Contact Form</title>
@@ -56,25 +54,25 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="form-group">
                 <label for="name" class="col-lg-2 control-label">Nome</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Nome" required>
+                    <input type="text" class="form-control required" id="name" name="name" placeholder="Nome" />
                 </div>
             </div>
             <div class="form-group">
                 <label for="email" class="col-lg-2 control-label">Email</label>
                 <div class="col-lg-10">
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                    <input type="email" class="form-control required" id="email" name="email" placeholder="Email" />
                 </div>
             </div>
             <div class="form-group">
                 <label for="assunto" class="col-lg-2 control-label">Assunto</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="assunto" name="assunto" placeholder="Assunto" required>
+                    <input type="text" class="form-control required" id="assunto" name="assunto" placeholder="Assunto" />
                 </div>
             </div>
             <div class="form-group">
                 <label for="mensagem" class="col-lg-2 control-label">Mensagem</label>
                 <div class="col-lg-10">
-                    <textarea class="form-control" rows="3" id="mensagem" name="mensagem" placeholder="Mensagem" required><?php if(isset($_POST['mensagem'])) { if(function_exists('stripslashes')) { echo stripslashes($_POST['mensagem']); } else { echo $_POST['mensagem']; } } ?></textarea>
+                    <textarea class="form-control required" rows="3" id="mensagem" name="mensagem" placeholder="Mensagem" /><?php if(isset($_POST['mensagem'])) { if(function_exists('stripslashes')) { echo stripslashes($_POST['mensagem']); } else { echo $_POST['mensagem']; } } ?></textarea>
                 </div>
             </div>
             <div class="form-group">
@@ -86,16 +84,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
     <?php endif; ?>
 
-    <?php
-        $ieVersion = preg_match('/MSIE (.*?);/', $_SERVER['HTTP_USER_AGENT'], $matches) ? floatval($matches[1]) : null;
-
-        if($ieVersion < 9 && $ieVersion != null) {
-            $jQueryVersion = '1.10.2';
-        } else {
-            $jQueryVersion = '2.0.3';
-        }
-    ?>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/<?php echo $jQueryVersion; ?>/jquery.min.js"></script>
-    <script type="text/javascript" src="assets/js/contact-form.js"></script>
+    <script type="text/javascript" src="assets/js/contact-form-vanillajs.js"></script>
 </body>
 </html>
