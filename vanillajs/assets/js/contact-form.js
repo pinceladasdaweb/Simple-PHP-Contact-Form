@@ -13,9 +13,6 @@ var FormValidation = (function (document) {
         removeError : function($el) {
             return $el.parentNode.classList.remove('has-error');
         },
-        checkValidity : function() {
-            return (typeof document.createElement('input').checkValidity === 'function');
-        },
         checkMail : function($input) {
             if (!module.testmail.test($input.value)) {
                 module._addError($input);
@@ -60,7 +57,7 @@ var FormValidation = (function (document) {
 
 
 
-    if (FormValidation.checkValidity() && $contactForm) {
+    if ($contactForm) {
         $contactForm.addEventListener("submit", function(e) {
 
             $requiredArray.forEach(function($element) {
