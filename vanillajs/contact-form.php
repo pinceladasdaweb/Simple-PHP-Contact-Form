@@ -36,7 +36,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
     <div class="jumbotron">
         <h1>Simple PHP Contact Form</h1>
-        <p>A Simple Contact Form developed in PHP with HTML5 Form validation. Has a fallback in jQuery for browsers that do not support HTML5 form validation.</p>
+        <p>A Simple Contact Form developed in PHP with VanillaJS Form validation.</p>
     </div>
     <?php if(isset($emailSent) && $emailSent): ?>
         <div class="col-md-6 col-md-offset-3">
@@ -84,6 +84,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
     <?php endif; ?>
 
-    <script type="text/javascript" src="assets/js/contact-form-vanillajs.js"></script>
+    <script type="text/javascript" src="assets/js/contact-form.js"></script>
 </body>
 </html>
