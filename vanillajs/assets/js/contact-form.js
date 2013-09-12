@@ -1,3 +1,17 @@
+/*
+--------------------------------
+Simple PHP Contact Form
+--------------------------------
++ https://github.com/pinceladasdaweb/Simple-PHP-Contact-Form
++ A Simple Contact Form developed in PHP with VanillaJS Form validation.
++ version 1.0
++ Copyright 2013 Pedro Rogerio
++ VanillaJS version developed by William Bruno <https://github.com/wbruno>
++ Licensed under the MIT license
+
++ https://github.com/pinceladasdaweb/Simple-PHP-Contact-Form
+*/
+
 /**
  * FormValidation
  */
