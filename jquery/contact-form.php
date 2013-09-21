@@ -74,7 +74,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="form-group">
                 <label for="mensagem" class="col-lg-2 control-label">Mensagem</label>
                 <div class="col-lg-10">
-                    <textarea class="form-control" rows="3" id="mensagem" name="mensagem" placeholder="Mensagem" required><?php if(isset($_POST['mensagem'])) { if(function_exists('stripslashes')) { echo stripslashes($_POST['mensagem']); } else { echo $_POST['mensagem']; } } ?></textarea>
+                    <textarea class="form-control" rows="3" id="mensagem" name="mensagem" placeholder="Mensagem" required></textarea>
                 </div>
             </div>
             <div class="form-group">
