@@ -49,27 +49,23 @@ var FormValidation = (function (document) {
         checkEmpty : module.checkEmpty,
         removeError: module.removeError
     };
-
 }(document));
 
-
 /**
- * @file contact-form-vanillajs.js
+ * @file contact-form.js
  */
 (function (document) {
     "use strict";
     /*jslint browser:true, plusplus:true*/
 
     var $contactForm = document.querySelector("#contact-form"),
-        $name        = document.querySelector("#name"),
-        $mail        = document.querySelector("#email"),
-        $assunto     = document.querySelector("#assunto"),
-        $mensagem    = document.querySelector("#mensagem"),
+        $name        = document.querySelector("#form-name"),
+        $mail        = document.querySelector("#form-email"),
+        $assunto     = document.querySelector("#form-assunto"),
+        $mensagem    = document.querySelector("#form-mensagem"),
         $required    = document.querySelectorAll(".required"),
 
         $requiredArray = Array.prototype.slice.call($required);
-
-
 
     if ($contactForm) {
         $contactForm.addEventListener("submit", function(e) {
@@ -77,7 +73,6 @@ var FormValidation = (function (document) {
             $requiredArray.forEach(function($element) {
                 FormValidation.removeError($element);
             });
-
 
             if (!FormValidation.checkEmpty($name)) {
                 e.preventDefault();

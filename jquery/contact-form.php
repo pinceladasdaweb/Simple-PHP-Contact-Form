@@ -2,10 +2,10 @@
 $emailTo = '<YOUR_EMAIL_HERE>';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $name     = stripslashes(trim($_POST['name']));
-    $email    = stripslashes(trim($_POST['email']));
-    $assunto  = stripslashes(trim($_POST['assunto']));
-    $mensagem = stripslashes(trim($_POST['mensagem']));
+    $name     = stripslashes(trim($_POST['form-name']));
+    $email    = stripslashes(trim($_POST['form-email']));
+    $assunto  = stripslashes(trim($_POST['form-assunto']));
+    $mensagem = stripslashes(trim($_POST['form-mensagem']));
 
     $emailIsValid = preg_match('/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/', $email);
 
@@ -56,25 +56,25 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="form-group">
                 <label for="name" class="col-lg-2 control-label">Nome</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Nome" required>
+                    <input type="text" class="form-control" id="form-name" name="form-name" placeholder="Nome" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="email" class="col-lg-2 control-label">Email</label>
                 <div class="col-lg-10">
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                    <input type="email" class="form-control" id="form-email" name="form-email" placeholder="Email" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="assunto" class="col-lg-2 control-label">Assunto</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="assunto" name="assunto" placeholder="Assunto" required>
+                    <input type="text" class="form-control" id="form-assunto" name="form-assunto" placeholder="Assunto" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="mensagem" class="col-lg-2 control-label">Mensagem</label>
                 <div class="col-lg-10">
-                    <textarea class="form-control" rows="3" id="mensagem" name="mensagem" placeholder="Mensagem" required></textarea>
+                    <textarea class="form-control" rows="3" id="form-mensagem" name="form-mensagem" placeholder="Mensagem" required></textarea>
                 </div>
             </div>
             <div class="form-group">
