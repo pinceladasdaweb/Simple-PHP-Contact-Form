@@ -61,8 +61,8 @@ var FormValidation = (function (document) {
     var $contactForm = document.querySelector("#contact-form"),
         $name        = document.querySelector("#form-name"),
         $mail        = document.querySelector("#form-email"),
-        $assunto     = document.querySelector("#form-assunto"),
-        $mensagem    = document.querySelector("#form-mensagem"),
+        $subject     = document.querySelector("#form-subject"),
+        $message     = document.querySelector("#form-message"),
         $required    = document.querySelectorAll(".required"),
 
         $requiredArray = Array.prototype.slice.call($required);
@@ -82,11 +82,11 @@ var FormValidation = (function (document) {
                 e.preventDefault();
             }
 
-            if (!FormValidation.checkEmpty($assunto)) {
+            if (!FormValidation.checkEmpty($subject)) {
                 e.preventDefault();
             }
 
-            if (!FormValidation.checkEmpty($mensagem)) {
+            if (!FormValidation.checkEmpty($message)) {
                 e.preventDefault();
             }
 
