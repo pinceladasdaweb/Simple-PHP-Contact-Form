@@ -2,16 +2,16 @@
 $emailTo = '<YOUR_EMAIL_HERE>';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $name     = stripslashes(trim($_POST['form-name']));
-    $email    = stripslashes(trim($_POST['form-email']));
-    $assunto  = stripslashes(trim($_POST['form-assunto']));
-    $mensagem = stripslashes(trim($_POST['form-mensagem']));
+    $name    = stripslashes(trim($_POST['form-name']));
+    $email   = stripslashes(trim($_POST['form-email']));
+    $subject = stripslashes(trim($_POST['form-subject']));
+    $message = stripslashes(trim($_POST['form-message']));
 
     $emailIsValid = preg_match('/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/', $email);
 
-    if($name && $email && $emailIsValid && $assunto && $mensagem){
-        $subject = "[Contato via site] $assunto";
-        $body = "Nome: $name <br /> Email: $email <br /> Mensagem: $mensagem";
+    if($name && $email && $emailIsValid && $subject && $message){
+        $subject = "[Contato via Site] $subject";
+        $body = "Nome: $name <br /> Email: $email <br /> Mensagem: $message";
 
         $headers  = 'MIME-Version: 1.1' . PHP_EOL;
         $headers .= 'Content-type: text/html; charset=utf-8' . PHP_EOL;
@@ -21,7 +21,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         mail($emailTo, $subject, $body, $headers);
         $emailSent = true;
-
     } else {
         $hasError = true;
     }
@@ -66,13 +65,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="form-group">
                 <label for="assunto" class="col-lg-2 control-label">Assunto</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control required" id="form-assunto" name="form-assunto" placeholder="Assunto" />
+                    <input type="text" class="form-control required" id="form-subject" name="form-subject" placeholder="Assunto" />
                 </div>
             </div>
             <div class="form-group">
                 <label for="mensagem" class="col-lg-2 control-label">Mensagem</label>
                 <div class="col-lg-10">
-                    <textarea class="form-control required" rows="3" id="form-mensagem" name="form-mensagem" placeholder="Mensagem" /></textarea>
+                    <textarea class="form-control required" rows="3" id="form-message" name="form-message" placeholder="Mensagem" /></textarea>
                 </div>
             </div>
             <div class="form-group">
