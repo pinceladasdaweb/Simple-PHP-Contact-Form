@@ -30,7 +30,7 @@ Simple PHP Contact Form
                 mail     = $('#form-email'),
                 assunto  = $('#form-assunto'),
                 mensagem = $('#form-mensagem'),
-                testmail = /^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/,
+                testmail = /^[^0-9][A-z0-9._%+-]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/,
                 $this    = $(this);
 
             $this.find('div').removeClass('has-error');

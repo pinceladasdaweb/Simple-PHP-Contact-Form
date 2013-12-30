@@ -20,7 +20,7 @@ var FormValidation = (function (document) {
     /*jslint browser:true*/
 
     var module = {
-        testmail : /^[a-zA-Z0-9][a-zA-Z0-9\._\-]+@([a-zA-Z0-9\._\-]+\.)[a-zA-Z-0-9]{2}/,
+        testmail : /^[^0-9][A-z0-9._%+-]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/,
         _addError : function($el) {
             return $el.parentNode.classList.add('has-error');
         },
