@@ -1,4 +1,5 @@
 <?php
+$subjectPrefix = '[Contato via Site]';
 $emailTo = '<YOUR_EMAIL_HERE>';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -10,7 +11,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $emailIsValid = preg_match('/^[^0-9][A-z0-9._%+-]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/', $email);
 
     if($name && $email && $emailIsValid && $subject && $message){
-        $subject = "[Contato via Site] $subject";
+        $subject = "$subjectPrefix $subject";
         $body = "Nome: $name <br /> Email: $email <br /> Mensagem: $message";
 
         $headers  = 'MIME-Version: 1.1' . PHP_EOL;
