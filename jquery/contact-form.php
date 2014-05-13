@@ -5,14 +5,15 @@ $emailTo = '<YOUR_EMAIL_HERE>';
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name     = stripslashes(trim($_POST['form-name']));
     $email    = stripslashes(trim($_POST['form-email']));
+    $tel      = stripslashes(trim($_POST['form-tel']));
     $assunto  = stripslashes(trim($_POST['form-assunto']));
     $mensagem = stripslashes(trim($_POST['form-mensagem']));
 
     $emailIsValid = preg_match('/^[^0-9][A-z0-9._%+-]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/', $email);
 
     if($name && $email && $emailIsValid && $assunto && $mensagem){
-        $subject = "$subjectPrefix $subject";
-        $body = "Nome: $name <br /> Email: $email <br /> Mensagem: $mensagem";
+        $subject = "$subjectPrefix $assunto";
+        $body = "Nome: $name <br /> Email: $email <br /> Telefone: $tel <br /> Mensagem: $mensagem";
 
         $headers  = 'MIME-Version: 1.1' . PHP_EOL;
         $headers .= 'Content-type: text/html; charset=utf-8' . PHP_EOL;
@@ -62,6 +63,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label for="email" class="col-lg-2 control-label">Email</label>
                 <div class="col-lg-10">
                     <input type="email" class="form-control" id="form-email" name="form-email" placeholder="Email" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="tel" class="col-lg-2 control-label">Telefone</label>
+                <div class="col-lg-10">
+                    <input type="tel" class="form-control" id="form-tel" name="form-tel" placeholder="Telefone">
                 </div>
             </div>
             <div class="form-group">
