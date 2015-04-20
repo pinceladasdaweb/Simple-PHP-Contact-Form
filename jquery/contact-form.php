@@ -5,20 +5,20 @@ $emailTo = '<YOUR_EMAIL_HERE>';
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name     = stripslashes(trim($_POST['form-name']));
     $email    = stripslashes(trim($_POST['form-email']));
-    $tel      = stripslashes(trim($_POST['form-tel']));
-    $assunto  = stripslashes(trim($_POST['form-assunto']));
-    $mensagem = stripslashes(trim($_POST['form-mensagem']));
+    $phone    = stripslashes(trim($_POST['form-tel']));
+    $subject  = stripslashes(trim($_POST['form-assunto']));
+    $message  = stripslashes(trim($_POST['form-mensagem']));
     $pattern  = '/[\r\n]|Content-Type:|Bcc:|Cc:/i';
 
-    if (preg_match($pattern, $name) || preg_match($pattern, $email) || preg_match($pattern, $assunto)) {
+    if (preg_match($pattern, $name) || preg_match($pattern, $email) || preg_match($pattern, $subject)) {
         die("Header injection detected");
     }
 
     $emailIsValid = preg_match('/^[^0-9][A-z0-9._%+-]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/', $email);
 
-    if($name && $email && $emailIsValid && $assunto && $mensagem){
-        $subject = "$subjectPrefix $assunto";
-        $body = "Nome: $name <br /> Email: $email <br /> Telefone: $tel <br /> Mensagem: $mensagem";
+    if($name && $email && $emailIsValid && $subject && $message){
+        $subject = "$subjectPrefix $subject";
+        $body = "Nome: $name <br /> Email: $email <br /> Telefone: $phone <br /> Mensagem: $message";
 
         $headers  = 'MIME-Version: 1.1' . PHP_EOL;
         $headers .= 'Content-type: text/html; charset=utf-8' . PHP_EOL;
@@ -46,12 +46,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         <h1>Simple PHP Contact Form</h1>
         <p>A Simple Contact Form developed in PHP with HTML5 Form validation. Has a fallback in jQuery for browsers that do not support HTML5 form validation.</p>
     </div>
-    <?php if(isset($emailSent) && $emailSent): ?>
+    <?php if(!empty($emailSent)): ?>
         <div class="col-md-6 col-md-offset-3">
             <div class="alert alert-success text-center">Sua mensagem foi enviada com sucesso.</div>
         </div>
     <?php else: ?>
-        <?php if(isset($hasError) && $hasError): ?>
+        <?php if(!empty($hasError)): ?>
         <div class="col-md-5 col-md-offset-4">
             <div class="alert alert-danger text-center">Houve um erro no envio, tente novamente mais tarde.</div>
         </div>
@@ -98,16 +98,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
     <?php endif; ?>
 
-    <?php
-        $ieVersion = preg_match('/MSIE (.*?);/', $_SERVER['HTTP_USER_AGENT'], $matches) ? floatval($matches[1]) : null;
-
-        if($ieVersion < 9 && $ieVersion != null) {
-            $jQueryVersion = '1.10.2';
-        } else {
-            $jQueryVersion = '2.0.3';
-        }
-    ?>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/<?php echo $jQueryVersion; ?>/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <![endif]-->
+    <!--[if gte IE 9]><!-->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <!--<![endif]-->
     <script type="text/javascript" src="assets/js/contact-form.js"></script>
 </body>
 </html>
