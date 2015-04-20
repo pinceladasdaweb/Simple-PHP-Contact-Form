@@ -44,12 +44,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         <h1>Simple PHP Contact Form</h1>
         <p>A Simple Contact Form developed in PHP with VanillaJS Form validation.</p>
     </div>
-    <?php if(isset($emailSent) && $emailSent): ?>
+    <?php if(!empty($emailSent)): ?>
         <div class="col-md-6 col-md-offset-3">
             <div class="alert alert-success text-center">Sua mensagem foi enviada com sucesso.</div>
         </div>
     <?php else: ?>
-        <?php if(isset($hasError) && $hasError): ?>
+        <?php if(!empty($hasError)): ?>
         <div class="col-md-5 col-md-offset-4">
             <div class="alert alert-danger text-center">Houve um erro no envio, tente novamente mais tarde.</div>
         </div>
