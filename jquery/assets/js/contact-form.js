@@ -28,8 +28,8 @@ Simple PHP Contact Form
             var hasError = false,
                 name     = $('#form-name'),
                 mail     = $('#form-email'),
-                assunto  = $('#form-assunto'),
-                mensagem = $('#form-mensagem'),
+                subject  = $('#form-assunto'),
+                message = $('#form-mensagem'),
                 testmail = /^[^0-9][A-z0-9._%+-]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/,
                 $this    = $(this);
 
@@ -45,14 +45,14 @@ Simple PHP Contact Form
                 addError(mail);
             }
 
-            if (assunto.val() === '') {
+            if (subject.val() === '') {
                 hasError = true;
-                addError(assunto);
+                addError(subject);
             }
 
-            if (mensagem.val() === '') {
+            if (message.val() === '') {
                 hasError = true;
-                addError(mensagem);
+                addError(message);
             }
 
             if (hasError === false) {
