@@ -4,8 +4,8 @@ Simple PHP Contact Form
 --------------------------------
 + https://github.com/pinceladasdaweb/Simple-PHP-Contact-Form
 + A Simple Contact Form developed in PHP with VanillaJS Form validation.
-+ version 1.0
-+ Copyright 2013 Pedro Rogerio
++ version 1.1
++ Copyright 2015 Pedro Rogerio
 + VanillaJS version developed by William Bruno <https://github.com/wbruno>
 + Licensed under the MIT license
 
@@ -20,7 +20,7 @@ var FormValidation = (function (document) {
     /*jslint browser:true*/
 
     var module = {
-        testmail : /^[^0-9][A-z0-9._%+-]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/,
+        testmail : /^[^0-9][A-z0-9._%+-]+([.][A-z0-9_]+)*[@][A-z0-9_-]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/,
         _addError : function($el) {
             return $el.parentNode.classList.add('has-error');
         },
