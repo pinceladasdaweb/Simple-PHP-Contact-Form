@@ -3,18 +3,18 @@ $subjectPrefix = '[Contato via Site]';
 $emailTo = '<YOUR_EMAIL_HERE>';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $name     = stripslashes(trim($_POST['form-name']));
-    $email    = stripslashes(trim($_POST['form-email']));
-    $phone    = stripslashes(trim($_POST['form-tel']));
-    $subject  = stripslashes(trim($_POST['form-assunto']));
-    $message  = stripslashes(trim($_POST['form-mensagem']));
-    $pattern  = '/[\r\n]|Content-Type:|Bcc:|Cc:/i';
+    $name    = stripslashes(trim($_POST['form-name']));
+    $email   = stripslashes(trim($_POST['form-email']));
+    $phone   = stripslashes(trim($_POST['form-tel']));
+    $subject = stripslashes(trim($_POST['form-assunto']));
+    $message = stripslashes(trim($_POST['form-mensagem']));
+    $pattern = '/[\r\n]|Content-Type:|Bcc:|Cc:/i';
 
     if (preg_match($pattern, $name) || preg_match($pattern, $email) || preg_match($pattern, $subject)) {
         die("Header injection detected");
     }
 
-    $emailIsValid = preg_match('/^[^0-9][A-z0-9._%+-]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/', $email);
+    $emailIsValid = filter_var($email, FILTER_VALIDATE_EMAIL);
 
     if($name && $email && $emailIsValid && $subject && $message){
         $subject = "$subjectPrefix $subject";
@@ -29,7 +29,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         mail($emailTo, $subject, $body, $headers);
         $emailSent = true;
-
     } else {
         $hasError = true;
     }
@@ -39,7 +38,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <title>Simple PHP Contact Form</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
 <body>
     <div class="jumbotron">
@@ -99,10 +98,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     <?php endif; ?>
 
     <!--[if lt IE 9]>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <![endif]-->
     <!--[if gte IE 9]><!-->
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <!--<![endif]-->
     <script type="text/javascript" src="assets/js/contact-form.js"></script>
 </body>

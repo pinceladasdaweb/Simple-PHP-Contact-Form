@@ -5,19 +5,20 @@ $emailTo = '<YOUR_EMAIL_HERE>';
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name    = stripslashes(trim($_POST['form-name']));
     $email   = stripslashes(trim($_POST['form-email']));
+    $phone   = stripslashes(trim($_POST['form-tel']));
     $subject = stripslashes(trim($_POST['form-subject']));
     $message = stripslashes(trim($_POST['form-message']));
-    $pattern  = '/[\r\n]|Content-Type:|Bcc:|Cc:/i';
+    $pattern = '/[\r\n]|Content-Type:|Bcc:|Cc:/i';
 
     if (preg_match($pattern, $name) || preg_match($pattern, $email) || preg_match($pattern, $subject)) {
         die("Header injection detected");
     }
 
-    $emailIsValid = preg_match('/^[^0-9][A-z0-9._%+-]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/', $email);
+    $emailIsValid = filter_var($email, FILTER_VALIDATE_EMAIL);
 
     if($name && $email && $emailIsValid && $subject && $message){
         $subject = "$subjectPrefix $subject";
-        $body = "Nome: $name <br /> Email: $email <br /> Mensagem: $message";
+        $body = "Nome: $name <br /> Email: $email <br /> Telefone: $phone <br /> Mensagem: $message";
 
         $headers  = 'MIME-Version: 1.1' . PHP_EOL;
         $headers .= 'Content-type: text/html; charset=utf-8' . PHP_EOL;
@@ -37,7 +38,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <title>Simple PHP Contact Form</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
 <body>
     <div class="jumbotron">
@@ -67,6 +68,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label for="email" class="col-lg-2 control-label">Email</label>
                 <div class="col-lg-10">
                     <input type="email" class="form-control required" id="form-email" name="form-email" placeholder="Email" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="tel" class="col-lg-2 control-label">Telefone</label>
+                <div class="col-lg-10">
+                    <input type="tel" class="form-control" id="form-tel" name="form-tel" placeholder="Telefone">
                 </div>
             </div>
             <div class="form-group">
