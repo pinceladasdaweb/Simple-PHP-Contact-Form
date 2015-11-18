@@ -29,7 +29,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $headers .= sprintf( 'Disposition-Notification-To: %s%s', $email, PHP_EOL );
         $headers .= sprintf( 'MIME-Version: 1.0%s', PHP_EOL );
         $headers .= sprintf( 'Content-Transfer-Encoding: 8bit%s', PHP_EOL );
-        $headers .= sprintf( 'Content-Type: text/html; charset="iso-8859-1"%s', PHP_EOL );
+        $headers .= sprintf( 'Content-Type: text/html; charset="utf-8"%s', PHP_EOL );
 
         mail($emailTo, "=?utf-8?B?".base64_encode($subject)."?=", $body, $headers);
         $emailSent = true;
