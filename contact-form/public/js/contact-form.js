@@ -1,17 +1,3 @@
-/*
---------------------------------
-Simple PHP Contact Form
---------------------------------
-+ https://github.com/pinceladasdaweb/Simple-PHP-Contact-Form
-+ A Simple Contact Form developed in PHP with HTML5 Form validation.
-+ Has a fallback in jQuery for browsers that do not support HTML5 form validation.
-+ version 1.1
-+ Copyright 2015 Pedro Rogerio
-+ Licensed under the MIT license
-
-+ https://github.com/pinceladasdaweb/Simple-PHP-Contact-Form
-*/
-
 (function ($, window, document, undefined) {
     'use strict';
 
@@ -28,8 +14,8 @@ Simple PHP Contact Form
             var hasError = false,
                 name     = $('#form-name'),
                 mail     = $('#form-email'),
-                subject  = $('#form-assunto'),
-                message = $('#form-mensagem'),
+                subject  = $('#form-subject'),
+                message  = $('#form-message'),
                 testmail = /^[^0-9][A-z0-9._%+-]+([.][A-z0-9_]+)*[@][A-z0-9_-]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/,
                 $this    = $(this);
 
