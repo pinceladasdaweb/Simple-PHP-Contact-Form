@@ -42,7 +42,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <title>Simple PHP Contact Form</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
 <body>
     <div class="jumbotron">
@@ -102,11 +102,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     <?php endif; ?>
 
     <!--[if lt IE 9]>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <![endif]-->
     <!--[if gte IE 9]><!-->
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <!--<![endif]-->
-    <script type="text/javascript" src="assets/js/contact-form.js"></script>
+    <script type="text/javascript" src="public/js/contact-form.js"></script>
 </body>
 </html>
