@@ -13,11 +13,57 @@ use SimpleMail\SimpleMail;
 $config = new Config;
 $config->load('./config/config.php');
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name    = stripslashes(trim($_POST['form-name']));
+    $email   = stripslashes(trim($_POST['form-email']));
+    $phone   = stripslashes(trim($_POST['form-phone']));
+    $subject = stripslashes(trim($_POST['form-subject']));
+    $message = stripslashes(trim($_POST['form-message']));
+    $pattern = '/[\r\n]|Content-Type:|Bcc:|Cc:/i';
+
+    if (preg_match($pattern, $name) || preg_match($pattern, $email) || preg_match($pattern, $subject)) {
+        die("Header injection detected");
+    }
+
+    $emailIsValid = filter_var($email, FILTER_VALIDATE_EMAIL);
+
+    if ($name && $email && $emailIsValid && $subject && $message) {
+        $mail = new SimpleMail();
+
+        $mail->setTo($config->get('emails.to'));
+        $mail->setFrom($config->get('emails.from'));
+        $mail->setSender($name);
+        $mail->setSubject($config->get('subject.prefix') . ' ' . $subject);
+
+        $body = "
+        <!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
+        <html>
+            <head>
+                <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />
+            </head>
+            <body>
+                <h1>{$subject}</h1>
+                <p><strong>{$config->get('fields.name')}:</strong> {$name}</p>
+                <p><strong>{$config->get('fields.email')}:</strong> {$email}</p>
+                <p><strong>{$config->get('fields.phone')}:</strong> {$phone}</p>
+                <p><strong>{$config->get('fields.message')}:</strong> {$message}</p>
+            </body>
+        </html>";
+
+        $mail->setHtml($body);
+        $mail->send();
+
+        $emailSent = true;
+    } else {
+        $hasError = true;
+    }
+}
 ?><!DOCTYPE html>
 <html>
 <head>
     <title>Simple PHP Contact Form</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
 <body>
@@ -37,7 +83,7 @@ $config->load('./config/config.php');
         <?php endif; ?>
 
     <div class="col-md-6 col-md-offset-3">
-        <form action="<?php echo $_SERVER['REQUEST_URI']; ?>" id="contact-form" class="form-horizontal" role="form" method="post">
+        <form action="<?php echo $_SERVER['REQUEST_URI']; ?>" enctype="application/x-www-form-urlencoded;" id="contact-form" class="form-horizontal" role="form" method="post">
             <div class="form-group">
                 <label for="form-name" class="col-lg-2 control-label"><?php echo $config->get('fields.name'); ?></label>
                 <div class="col-lg-10">
