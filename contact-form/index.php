@@ -39,33 +39,33 @@ $config->load('./config/config.php');
     <div class="col-md-6 col-md-offset-3">
         <form action="<?php echo $_SERVER['REQUEST_URI']; ?>" id="contact-form" class="form-horizontal" role="form" method="post">
             <div class="form-group">
-                <label for="name" class="col-lg-2 control-label"><?php echo $config->get('fields.name'); ?></label>
+                <label for="form-name" class="col-lg-2 control-label"><?php echo $config->get('fields.name'); ?></label>
                 <div class="col-lg-10">
                     <input type="text" class="form-control" id="form-name" name="form-name" placeholder="<?php echo $config->get('fields.name'); ?>" required>
                 </div>
             </div>
             <div class="form-group">
-                <label for="email" class="col-lg-2 control-label"><?php echo $config->get('fields.email'); ?></label>
+                <label for="form-email" class="col-lg-2 control-label"><?php echo $config->get('fields.email'); ?></label>
                 <div class="col-lg-10">
                     <input type="email" class="form-control" id="form-email" name="form-email" placeholder="<?php echo $config->get('fields.email'); ?>" required>
                 </div>
             </div>
             <div class="form-group">
-                <label for="tel" class="col-lg-2 control-label"><?php echo $config->get('fields.phone'); ?></label>
+                <label for="form-phone" class="col-lg-2 control-label"><?php echo $config->get('fields.phone'); ?></label>
                 <div class="col-lg-10">
-                    <input type="tel" class="form-control" id="form-tel" name="form-tel" placeholder="<?php echo $config->get('fields.phone'); ?>">
+                    <input type="tel" class="form-control" id="form-phone" name="form-phone" placeholder="<?php echo $config->get('fields.phone'); ?>">
                 </div>
             </div>
             <div class="form-group">
-                <label for="assunto" class="col-lg-2 control-label"><?php echo $config->get('fields.subject'); ?></label>
+                <label for="form-subject" class="col-lg-2 control-label"><?php echo $config->get('fields.subject'); ?></label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="form-assunto" name="form-assunto" placeholder="<?php echo $config->get('fields.subject'); ?>" required>
+                    <input type="text" class="form-control" id="form-subject" name="form-subject" placeholder="<?php echo $config->get('fields.subject'); ?>" required>
                 </div>
             </div>
             <div class="form-group">
-                <label for="mensagem" class="col-lg-2 control-label"><?php echo $config->get('fields.message'); ?></label>
+                <label for="form-message" class="col-lg-2 control-label"><?php echo $config->get('fields.message'); ?></label>
                 <div class="col-lg-10">
-                    <textarea class="form-control" rows="3" id="form-mensagem" name="form-mensagem" placeholder="<?php echo $config->get('fields.message'); ?>" required></textarea>
+                    <textarea class="form-control" rows="3" id="form-message" name="form-message" placeholder="<?php echo $config->get('fields.message'); ?>" required></textarea>
                 </div>
             </div>
             <div class="form-group">
