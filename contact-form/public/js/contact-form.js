@@ -1,15 +1,17 @@
 (function ($, window, document, undefined) {
     'use strict';
 
-    function hasFormValidation () {
-        return (typeof document.createElement('input').checkValidity === 'function');
-    };
+    function isSafari() {
+        return /^((?!chrome).)*safari/i.test(navigator.userAgent);
+    }
 
     function addError (el) {
         return el.parent().addClass('has-error');
     };
 
-    if (!hasFormValidation()) {
+    var inputElem = document.createElement('input');
+
+    if (!('required' in inputElem) || isSafari()) {
         $('#contact-form').submit(function () {
             var hasError = false,
                 name     = $('#form-name'),
