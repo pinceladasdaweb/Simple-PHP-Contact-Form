@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
 
     <div class="col-md-6 col-md-offset-3">
-        <form action="<?php echo $_SERVER['REQUEST_URI']; ?>" enctype="application/x-www-form-urlencoded;" id="contact-form" class="form-horizontal" role="form" method="post">
+        <form action="<?php echo $_SERVER['REQUEST_URI']; ?>" enctype="application/x-www-form-urlencoded" id="contact-form" class="form-horizontal" method="post">
             <div class="form-group">
                 <label for="form-name" class="col-lg-2 control-label"><?php echo $config->get('fields.name'); ?></label>
                 <div class="col-lg-10">
