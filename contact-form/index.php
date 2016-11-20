@@ -33,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail->setTo($config->get('emails.to'));
         $mail->setFrom($config->get('emails.from'));
         $mail->setSender($name);
+        $mail->setSenderEmail($email);
         $mail->setSubject($config->get('subject.prefix') . ' ' . $subject);
 
         $body = "
@@ -68,8 +69,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <div class="jumbotron">
-        <h1>Simple PHP Contact Form</h1>
-        <p>A Simple Contact Form developed in PHP with HTML5 Form validation. Has a fallback in jQuery for browsers that do not support HTML5 form validation.</p>
+        <div class="container">
+            <h1>Simple PHP Contact Form</h1>
+            <p>A Simple Contact Form developed in PHP with HTML5 Form validation. Has a fallback in <strike>jQuery</strike> pure JavaScript for browsers that do not support HTML5 form validation.</p>
+        </div>
     </div>
     <?php if(!empty($emailSent)): ?>
         <div class="col-md-6 col-md-offset-3">
@@ -123,12 +126,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     <?php endif; ?>
 
-    <!--[if lt IE 9]>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <![endif]-->
-    <!--[if gte IE 9]><!-->
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <!--<![endif]-->
     <script type="text/javascript" src="public/js/contact-form.js"></script>
+    <script type="text/javascript">
+        new ContactForm('#contact-form');
+    </script>
 </body>
 </html>
