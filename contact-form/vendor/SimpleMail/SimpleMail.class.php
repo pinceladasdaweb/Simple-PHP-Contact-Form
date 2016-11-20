@@ -15,6 +15,7 @@ class SimpleMail
     protected $to;
     protected $from;
     protected $sender;
+    protected $sender_email;
     protected $subject;
     protected $html;
 
@@ -31,6 +32,11 @@ class SimpleMail
     public function setSender($sender)
     {
         $this->sender = $sender;
+    }
+
+    public function setSenderEmail($sender_email)
+    {
+        $this->sender_email = $sender_email;
     }
 
     public function setSubject($subject)
@@ -50,8 +56,8 @@ class SimpleMail
         $header   = 'MIME-Version: 1.0' . PHP_EOL;
         $header  .= 'To: <' . $this->to . '>' . PHP_EOL;
         $header  .= 'Date: ' . date('D, d M Y H:i:s O') . PHP_EOL;
-        $header  .= 'From: =?UTF-8?B?' . base64_encode($this->sender) . '?= <' . $this->from . '>' . PHP_EOL;
-        $header  .= 'Reply-To: =?UTF-8?B?' . base64_encode($this->sender) . '?= <' . $this->from . '>' . PHP_EOL;
+        $header  .= 'From: =?UTF-8?B?' . base64_encode($this->sender) . '?= <' . $this->sender_email . '>' . PHP_EOL;
+        $header  .= 'Reply-To: =?UTF-8?B?' . base64_encode($this->sender) . '?= <' . $this->sender_email . '>' . PHP_EOL;
         $header  .= 'Return-Path: ' . $this->from . PHP_EOL;
         $header  .= 'X-Mailer: PHP/' . phpversion() . PHP_EOL;
         $header  .= 'X-Priority: 3' . PHP_EOL;
