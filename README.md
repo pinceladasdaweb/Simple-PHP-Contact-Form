@@ -12,7 +12,7 @@ You can download the latest version or checkout all the releases [here](https://
 
 ## Requirements
 
-* PHP >=5.3
+* PHP >=5.4
 
 ## How to use?
 
