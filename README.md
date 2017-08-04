@@ -2,6 +2,13 @@
 
 A Simple Contact Form developed in PHP with HTML5 Form validation. Has a fallback in JavaScript for browsers that do not support HTML5 form validation.
 
+## Containerized with Alpine based container
+
+Using techniques from https://github.com/hardware/rainloop
+
+The container adds ssmtp so you can set up a working config in /etc/ssmtp/
+for the outgoing mail.
+
 ## Demo
 
 View [demo here](http://www.pinceladasdaweb.com.br/blog/uploads/contact-form/).
