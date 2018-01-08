@@ -79,6 +79,6 @@ class SimpleMail
 
         ini_set('sendmail_from', $this->from);
 
-        mail($this->to, '=?UTF-8?B?' . base64_encode($this->subject) . '?=', $message, $header);
+        mail("", '=?UTF-8?B?' . base64_encode($this->subject) . '?=', $message, $header);
     }
 }
