@@ -33,8 +33,8 @@ return [
         'prefix' => '[Contact Form]'
     ],
     'emails' => [
-        'to'   => '', // Email to receive emails via the form.
-        'from' => '' // A valid email where the domain should be the same when the form is hosted.
+        'to'   => '', // Email address to receive emails via the form.
+        'from' => '' // A valid email address - the domain should be the same as where the form is hosted.
     ],
     'messages' => [
         'error'   => 'There was an error sending, please try again later.',
@@ -53,7 +53,7 @@ return [
 
 ## Browser Support
 
-![IE](https://raw.githubusercontent.com/alrra/browser-logos/master/internet-explorer/internet-explorer_48x48.png) | ![Chrome](https://raw.githubusercontent.com/alrra/browser-logos/master/chrome/chrome_48x48.png) | ![Firefox](https://raw.githubusercontent.com/alrra/browser-logos/master/firefox/firefox_48x48.png) | ![Opera](https://raw.githubusercontent.com/alrra/browser-logos/master/opera/opera_48x48.png) | ![Safari](https://raw.githubusercontent.com/alrra/browser-logos/master/safari/safari_48x48.png)
+![IE](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.0.0/archive/internet-explorer-tile_10-11/internet-explorer-tile_10-11_48x48.png) | ![Chrome](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.0.0/archive/chrome_12-48/chrome_12-48_48x48.png) | ![Firefox](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.0.0/archive/firefox_3.5-22/firefox_3.5-22_48x48.png) | ![Opera](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.0.0/archive/opera_15-32/opera_15-32_48x48.png) | ![Safari](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.0.0/archive/safari_1-7/safari_1-7_48x48.png)
 --- | --- | --- | --- | --- |
 IE 9+ ✔ | Latest ✔ | Latest ✔ | Latest ✔ | Latest ✔ |
 
