@@ -9,7 +9,7 @@ return [
         'from' => ''
     ],
     'messages' => [
-        'error'   => 'There was an error sending, please try again later.',
+        'error'   => 'There was an error sending your message, please try again later.',
         'success' => 'Your message has been sent successfully.'
     ],
     'fields' => [
