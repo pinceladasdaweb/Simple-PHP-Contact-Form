@@ -9,10 +9,6 @@ Using techniques from https://github.com/hardware/rainloop
 The container adds ssmtp so you can set up a working config in /etc/ssmtp/
 for the outgoing mail.
 
-## Demo
-
-View [demo here](http://www.pinceladasdaweb.com.br/blog/uploads/contact-form/).
-
 ## Download
 
 You can download the latest version or checkout all the releases [here](https://github.com/pinceladasdaweb/Simple-PHP-Contact-Form/releases).
